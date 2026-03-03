@@ -1,0 +1,117 @@
+<mxfile host="app.diagrams.net" modified="2026-03-10T19:30:00.000Z" agent="Grok" version="24.x" etag="youtube-hld-chat-style" type="device">
+  <diagram id="youtube-hld-chat-inspired" name="YouTube-like Video Platform - HLD">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Clients -->
+        <mxCell id="clients" value="Clients&lt;br&gt;(Web / iOS / Android / TV)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=center;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="600" y="30" width="300" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- API Gateway / LB -->
+        <mxCell id="gateway" value="API Gateway + Load Balancers&lt;br&gt;- Authentication (JWT)&lt;br&gt;- Authorization&lt;br&gt;- Rate Limiting&lt;br&gt;- Routing" style="shape=process;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=center;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="500" y="140" width="500" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- WebSocket / Streaming LB -->
+        <mxCell id="ws-gateway" value="WebSocket / HTTP/2 Gateway + LB&lt;br&gt;(supports long-lived connections)&lt;br&gt;- Live chat, live comments&lt;br&gt;- Real-time view count" style="shape=process;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="140" width="350" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Upload Service -->
+        <mxCell id="uploader" value="Upload Service&lt;br&gt;- Multipart upload&lt;br&gt;- Presigned URLs (S3/GCS)&lt;br&gt;- Virus scan" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="200" y="300" width="220" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Metadata / Video Service -->
+        <mxCell id="metadata" value="Video Metadata Service&lt;br&gt;- videoID, title, desc, tags&lt;br&gt;- channelID, views, likes&lt;br&gt;- thumbnails URLs" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="550" y="300" width="250" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Recommendation / Feed Service -->
+        <mxCell id="rec" value="Recommendation / Feed Service&lt;br&gt;- Two-stage (candidates + ranker)&lt;br&gt;- Watch-time prediction" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="900" y="300" width="250" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Search Service -->
+        <mxCell id="search" value="Search Service&lt;br&gt;(Elasticsearch / OpenSearch)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e2e2e2;strokeColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="300" width="220" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Kafka central -->
+        <mxCell id="kafka" value="Kafka / Event Bus&lt;br&gt;(async heavy writes)&lt;br&gt;- video_uploaded&lt;br&gt;- view_event, like_event" style="shape=process;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=center;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="600" y="500" width="300" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Blob Storage -->
+        <mxCell id="blob" value="BLOB Storage&lt;br&gt;(GCS / S3)&lt;br&gt;Original + Transcoded versions&lt;br&gt;Thumbnails" style="shape=cylinder;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=center;" vertex="1" parent="1">
+          <mxGeometry x="200" y="700" width="300" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Metadata DB -->
+        <mxCell id="metadb" value="Metadata DB&lt;br&gt;(PostgreSQL / Cassandra / Vitess)&lt;br&gt;- videos table&lt;br&gt;- channels table&lt;br&gt;- views/likes counters (approx)" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="600" y="700" width="280" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Hot Cache / Registry -->
+        <mxCell id="redis" value="Redis&lt;br&gt;- Hot videos metadata&lt;br&gt;- Popular channels&lt;br&gt;- Session / connection registry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="700" width="220" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Transcoding Workers -->
+        <mxCell id="transcode" value="Transcoding Workers&lt;br&gt;(FFmpeg / cloud jobs)&lt;br&gt;- 360p → 4K&lt;br&gt;- Thumbnails&lt;br&gt;- Captions (STT)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="200" y="900" width="300" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Notification Service -->
+        <mxCell id="notify" value="Notification Service&lt;br&gt;- New comment / like&lt;br&gt;- Upload complete&lt;br&gt;- FCM (Android) / APNs (iOS)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="900" y="900" width="250" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Connections / Flows -->
+        <mxCell id="e1" value="1. Upload video → multipart" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=0.5;entryY=1;fontSize=11;" edge="1" parent="1" source="clients" target="gateway">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2" value="2. → Upload Service" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.2;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="gateway" target="uploader">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3" value="3. Upload chunks → S3/GCS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="uploader" target="blob">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e4" value="4. video_uploaded event" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;dashed=1;" edge="1" parent="1" source="uploader" target="kafka">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e5" value="5. Transcode jobs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="kafka" target="transcode">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e6" value="6. Update metadata (ready)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;dashed=1;" edge="1" parent="1" source="transcode" target="metadb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e7" value="Watch / Feed / Search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="gateway" target="metadata">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e8" value="View / Like events → eventual consistency" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;dashed=1;" edge="1" parent="1" source="ws-gateway" target="kafka">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e9" value="CDC / last active → User status" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;dashed=1;" edge="1" parent="1" source="kafka" target="metadb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e10" value="Real-time comments / live" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="ws-gateway" target="rec">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
